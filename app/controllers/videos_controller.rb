@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   def show
-    s3_bucket_url = "http://s3.amazonaws.com/panda-test-videos/"
+    s3_bucket_url = "http://s3.amazonaws.com/change-me/"
 
     @video = Video.find(params[:id])
     @video_data =  JSON.parse(Panda.get("/videos/#{@video.panda_video_id}.json"))
@@ -13,6 +13,7 @@ class VideosController < ApplicationController
   
   def new
     @video = Video.new
+    @panda_access_details = Panda.authentication_params('post', "/videos.json", {}).to_json
   end
   
   def create

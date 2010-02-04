@@ -3,6 +3,7 @@
 uuid.state
 .DS_Store
 database.yml
+panda.yml
 schema.rb
 tmp/*
-config/panda.yml
+*.sqlite3

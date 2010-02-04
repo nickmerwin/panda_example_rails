@@ -1,20 +1,29 @@
-<%= js_panda_uploader_init %>
-
 <% form_for @video do |f| %>
   <p>
     <%= f.label :title %>
     <%= f.text_field :title %>
   </p>
+  
+  <span id="upload_button"></span>
 
-  <p>
-    <label for="upload_button">File</label>
-    <span id="upload_button"></span>      
-    <input type="text" id="upload_filename" disabled="true" />
-    <div id="upload_progress"></div>
-  </p>
+   <!-- filename of the selected file (optional) -->
+   <input type="text" id="upload_filename" class="panda_upload_filename" disabled="true" />
 
-  <p>
-    <input type="hidden" name="video[panda_video_id]" id="returned_video_id" value="" />
-    <input type="submit" value="Upload video" id="submit_button" />
-  </p>
+   <!-- upload progress bar (optional) -->
+   <div id="upload_progress" class="panda_upload_progress"></div>
+
+   <!-- field where the video ID will be stored after the upload -->
+   <input type="hidden" name="video[panda_video_id]" id="returned_video_id" />
+
+   <!-- a submit button -->
+   <p><input type="submit" value="Upload video" /></p>
+
+   <script>
+   jQuery("#returned_video_id").pandaUploader(<%= @panda_access_details %>, {
+       upload_button_id: 'upload_button',
+       upload_filename_id: 'upload_filename', // Optional
+       upload_progress_id: 'upload_progress'  // Optional
+   });
+   
+   </script>
 <% end %>
